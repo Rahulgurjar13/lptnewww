@@ -9,7 +9,10 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sitemaps": "node scripts/gen-sitemaps.mjs",
+    "audit": "python3 scripts/audit.py",
+    "gate": "npm run build && npm run audit"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

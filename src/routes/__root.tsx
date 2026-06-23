@@ -7,9 +7,13 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { BRAND, BRAND_SHORT, DOMAIN } from "@/config/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema } from "@/lib/schema";
+import { SiteChrome } from "@/components/lpt/SiteChrome";
 
 function NotFoundComponent() {
   return (
@@ -73,19 +77,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LPT — India's Top Coaching for CAT, IPMAT & CUET" },
+      { title: `${BRAND} — CUET & IPMAT Coaching` },
       {
         name: "description",
-        content:
-          "LPT is India's premium coaching brand for CAT/MBA, IPMAT/BBA and CUET. 100+ IIM calls, 24+ years of legacy, taught by mentors with 10+ years average experience.",
+        content: `${BRAND} (${BRAND_SHORT}) — CUET & IPMAT coaching across 4 Delhi-NCR centres: Noida, Hauz Khas, GTB Nagar and Gurugram. Offline, online and hybrid batches.`,
       },
-      { name: "author", content: "LPT" },
-      { property: "og:title", content: "LPT — Make It to IIMs and Beyond" },
+      { name: "author", content: BRAND },
+      { property: "og:site_name", content: BRAND },
+      { property: "og:title", content: `${BRAND} — CUET & IPMAT Coaching` },
       {
         property: "og:description",
-        content: "Premium coaching for CAT, IPMAT and CUET. Trusted by 150,000+ aspirants.",
+        content: "CUET & IPMAT coaching in Delhi-NCR. 4 centres across Noida, Hauz Khas, GTB Nagar and Gurugram.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: DOMAIN },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -96,6 +101,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap",
       },
       { rel: "stylesheet", href: appCss },
+      // Canonical is emitted per-page by the <Canonical> component (one self-
+      // referencing canonical per page, SOP A1.2) — not here.
     ],
   }),
   shellComponent: RootShell,
@@ -123,8 +130,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      {/* Global Organization JSON-LD (SOP A5.1) — present on every page, SSR'd. */}
+      <JsonLd schema={organizationSchema()} />
+      {/* Persistent chrome (nav, footer, modals) wraps every route. */}
+      <SiteChrome>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </SiteChrome>
     </QueryClientProvider>
   );
 }

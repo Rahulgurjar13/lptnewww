@@ -1,95 +1,151 @@
-import { MapPin, Phone, Mail, Instagram, Youtube, Linkedin, Facebook, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Instagram, Youtube, Linkedin } from "lucide-react";
+import {
+  BRAND,
+  CENTRES,
+  EMAIL,
+  LEGAL_LINKS,
+  PHONE,
+  SOCIAL,
+  getVerticalTree,
+  isPlaceholder,
+  telLink,
+  type Vertical,
+} from "@/config/site";
 
-const importantLinks = ["About LPT", "Centers Near You", "Our Mentors", "Toppers Wall", "Careers", "Press & Media"];
-const quickLinks = ["CAT Coaching", "IPMAT Coaching", "CUET Coaching", "Test Series", "Study Material", "Scholarship"];
-const seoClusters: { title: string; links: string[] }[] = [
-  { title: "Offline CAT Coaching", links: ["Jaipur", "Delhi", "Mumbai", "Pune", "Bangalore", "Hyderabad", "Ahmedabad", "Kota"] },
-  { title: "Offline IPMAT Coaching", links: ["Jaipur", "Delhi", "Indore", "Mumbai", "Lucknow", "Chandigarh", "Kolkata"] },
-  { title: "CAT Exam Info", links: ["Eligibility", "Syllabus", "Exam Pattern", "Cutoffs", "Previous Papers", "Results"] },
-  { title: "IPMAT Exam Info", links: ["IPM Indore", "JIPMAT", "IIM Rohtak", "IIM Bodh Gaya", "IIM Jammu"] },
-  { title: "CLAT", links: ["CLAT 2026", "AILET", "DU LLB", "Study Material"] },
+/**
+ * Fat footer / human sitemap. CUET & IPMAT columns list the top cluster hubs
+ * (from SITE_TREE, single source of truth); Centres lists the 4 NAP locations;
+ * Company lists key cross-section pages. The 4-centre NAP block is byte-identical
+ * with config (SOP §0). Social/phone/email render only when real.
+ */
+const socials = [
+  { Icon: Youtube, url: SOCIAL.youtube, label: "YouTube" },
+  { Icon: Instagram, url: SOCIAL.instagram, label: "Instagram" },
+  { Icon: Linkedin, url: SOCIAL.linkedin, label: "LinkedIn" },
 ];
 
+const company = [
+  { label: "About", href: "/about" },
+  { label: "Our Centres", href: "/centres" },
+  { label: "Results", href: "/results" },
+  { label: "Resources", href: "/resources" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Blog", href: "/blog" },
+  { label: "News", href: "/news" },
+  { label: "Contact", href: "/contact" },
+  { label: "Full sitemap", href: "/sitemap" },
+];
+
+function VerticalCol({ vertical, hub }: { vertical: Vertical; hub: string }) {
+  // Cluster head (first entry) of each cluster = the section hub link.
+  const clusters = getVerticalTree(vertical).slice(0, 6);
+  return (
+    <div>
+      <div className="eyebrow text-[11px]">{vertical}</div>
+      <ul className="mt-5 space-y-2.5 text-sm text-white/75">
+        <li>
+          <a href={hub} className="font-semibold text-white hover:text-brand">{vertical} guide</a>
+        </li>
+        {clusters.map((c) => (
+          <li key={c.cluster}>
+            <a href={c.entries[0].href} className="hover:text-white">{c.cluster}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function Footer() {
+  const year = new Date().getFullYear();
+  const phoneKnown = !isPlaceholder(PHONE);
+
   return (
     <footer className="bg-[#0F1015] text-white">
-      <div className="container-lpt py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div className="container-lpt py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+          {/* Brand + contact */}
           <div>
-            <div className="flex items-center">
-              <img src="/logo.svg" alt="LPT Logo" className="h-10 w-auto" />
-            </div>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-              India's premium coaching brand for CAT, IPMAT and CUET. 24 years of legacy, 150,000+
-              students mentored, 100+ IIM calls every year.
+            <img src="/logo.svg" alt={BRAND} className="h-10 w-auto" />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
+              {BRAND} — CUET &amp; IPMAT coaching across 4 Delhi-NCR centres in Noida, Hauz Khas, GTB
+              Nagar and Gurugram. Offline, online and hybrid batches.
             </p>
-            <div className="mt-6 flex gap-2">
-              {[Instagram, Youtube, Linkedin, Facebook, Send].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 transition-all hover:border-brand hover:bg-brand hover:text-white"
-                  aria-label="Social link"
-                >
-                  <Icon className="h-4 w-4" strokeWidth={1.75} />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="eyebrow text-[11px]">Important Links</div>
-            <ul className="mt-5 space-y-2.5 text-sm text-white/75">
-              {importantLinks.map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-white">{l}</a>
+            <ul className="mt-5 space-y-2 text-sm text-white/75">
+              {phoneKnown && (
+                <li className="flex items-center gap-3">
+                  <Phone className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.75} />
+                  <a href={telLink(PHONE)} className="hover:text-white">{PHONE}</a>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <div className="eyebrow text-[11px]">Quick Links</div>
-            <ul className="mt-5 space-y-2.5 text-sm text-white/75">
-              {quickLinks.map((l) => (
-                <li key={l}>
-                  <a href="#" className="hover:text-white">{l}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <div className="eyebrow text-[11px]">Contact</div>
-            <ul className="mt-5 space-y-3 text-sm text-white/75">
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" strokeWidth={1.75} />
-                <span>4th Floor, LPT House, C-Scheme, Jaipur 302001, Rajasthan, India</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.75} />
-                <a href="tel:+919116695959" className="hover:text-white">+91 91166 95959</a>
-              </li>
+              )}
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.75} />
-                <a href="mailto:hello@lpt.in" className="hover:text-white">hello@lpt.in</a>
+                <a href={`mailto:${EMAIL}`} className="hover:text-white">{EMAIL}</a>
               </li>
+            </ul>
+            {socials.some((s) => !isPlaceholder(s.url)) && (
+              <div className="mt-6 flex gap-2">
+                {socials
+                  .filter((s) => !isPlaceholder(s.url))
+                  .map(({ Icon, url, label }) => (
+                    <a
+                      key={label}
+                      href={url}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 transition-all hover:border-brand hover:bg-brand hover:text-white"
+                    >
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </a>
+                  ))}
+              </div>
+            )}
+          </div>
+
+          <VerticalCol vertical="CUET" hub="/cuet" />
+          <VerticalCol vertical="IPMAT" hub="/ipmat" />
+
+          {/* Centres */}
+          <div>
+            <div className="eyebrow text-[11px]">Centres</div>
+            <ul className="mt-5 space-y-2.5 text-sm text-white/75">
+              {CENTRES.map((c) => (
+                <li key={c.slug}>
+                  <a href={`/centres/${c.slug}`} className="hover:text-white">{c.area}</a>
+                </li>
+              ))}
+              <li><a href="/centres" className="font-semibold text-white hover:text-brand">All centres</a></li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <div className="eyebrow text-[11px]">Company</div>
+            <ul className="mt-5 space-y-2.5 text-sm text-white/75">
+              {company.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="hover:text-white">{l.label}</a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* SEO clusters */}
-        <div className="mt-16 grid gap-8 border-t border-white/10 pt-12 md:grid-cols-3 lg:grid-cols-5">
-          {seoClusters.map((c) => (
-            <div key={c.title}>
-              <div className="text-sm font-semibold text-white">{c.title}</div>
-              <ul className="mt-3 space-y-2 text-xs text-white/55">
-                {c.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="hover:text-white/90">{c.title.includes("Coaching") ? `${c.title.split(" ").slice(-1)[0]} Coaching in ${l}` : l}</a>
-                  </li>
-                ))}
-              </ul>
+        {/* 4 centres — NAP sitewide (SOP §0 / E4) */}
+        <div className="mt-14 grid gap-8 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
+          {CENTRES.map((c) => (
+            <div key={c.slug}>
+              <div className="flex items-center gap-2 text-sm font-semibold text-white">
+                <MapPin className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.75} />
+                {c.area}
+              </div>
+              <address className="mt-2 not-italic text-xs leading-relaxed text-white/55">
+                {c.fullAddress}
+              </address>
+              <a href={`/centres/${c.slug}`} className="mt-2 inline-block text-xs font-semibold text-brand hover:text-white">
+                View centre →
+              </a>
             </div>
           ))}
         </div>
@@ -97,11 +153,12 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-lpt flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/55 md:flex-row">
-          <span>© {new Date().getFullYear()} LPT Education Pvt. Ltd. All rights reserved.</span>
+          <span>© {year} {BRAND}. All rights reserved.</span>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-            <a href="#" className="hover:text-white">Refund Policy</a>
+            {LEGAL_LINKS.map((l) => (
+              <a key={l.href} href={l.href} className="hover:text-white">{l.label}</a>
+            ))}
+            <a href="/sitemap" className="hover:text-white">Sitemap</a>
           </div>
         </div>
       </div>

@@ -1,13 +1,14 @@
-import { Reveal, CountUp } from "./Reveal";
-import { Eyebrow } from "./shared";
+import { Reveal } from "./Reveal";
+import { Eyebrow, Tbd } from "./shared";
 import { ArrowRight, Trophy } from "lucide-react";
 import scholarship from "@/assets/scholarship.png";
 
+// Unverified scholarship figures render as marked placeholders (no fabrication).
 const stats = [
-  { v: 100, s: "%", label: "Max Scholarship" },
-  { v: 5000, s: "+", label: "Students Benefited" },
-  { v: 60, s: "L+", label: "Awarded / Year" },
-  { v: 10, s: "+", label: "Eligible Courses" },
+  { value: null as string | null, label: "Max Scholarship", placeholder: "%" },
+  { value: null, label: "Students Benefited", placeholder: "count" },
+  { value: null, label: "Awarded / Year", placeholder: "amount" },
+  { value: null, label: "Eligible Courses", placeholder: "count" },
 ];
 
 export function Scholarship() {
@@ -28,18 +29,17 @@ export function Scholarship() {
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
                   <button className="btn-primary">
-                    Apply for CAT / MBA <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                    Apply for CUET <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                   </button>
                   <button className="btn-secondary">
-                    Apply for IPM / BBA <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                    Apply for IPMAT <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                   </button>
                 </div>
                 <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
                   {stats.map((s) => (
                     <div key={s.label}>
                       <div className="h-display text-3xl text-ink">
-                        <CountUp to={s.v} />
-                        <span className="text-brand">{s.s}</span>
+                        {s.value ?? <Tbd label={s.placeholder} />}
                       </div>
                       <div className="mt-1 text-xs uppercase tracking-wider text-body">{s.label}</div>
                     </div>
@@ -58,7 +58,7 @@ export function Scholarship() {
                 />
                 <div className="absolute bottom-2 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-ink shadow-[0_8px_16px_rgba(0,0,0,0.08)]">
                   <Trophy className="h-4 w-4 text-brand" strokeWidth={2} />
-                  Next LSAT · 12 Apr
+                  Next test date <Tbd label="date" />
                 </div>
               </div>
             </div>

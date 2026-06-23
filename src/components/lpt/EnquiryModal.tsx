@@ -19,7 +19,7 @@ export function EnquiryModal({ open, onClose }: { open: boolean; onClose: () => 
             Free · 30 mins
           </div>
           <h3 className="mt-3 h-display text-2xl text-white">
-            Talk to a mentor who's coached IIM toppers.
+            Talk to a CUET &amp; IPMAT mentor.
           </h3>
           <ul className="mt-6 space-y-3 text-sm text-white/85">
             <li>✓ Personalised study plan</li>
@@ -28,9 +28,9 @@ export function EnquiryModal({ open, onClose }: { open: boolean; onClose: () => 
             <li>✓ No sales pressure — promise.</li>
           </ul>
           <div className="mt-12 rounded-2xl bg-white/10 p-4 backdrop-blur">
-            <div className="text-xs uppercase tracking-wider text-white/70">Trusted by</div>
-            <div className="mt-1 h-display text-3xl text-white">150,000+</div>
-            <div className="text-xs text-white/80">aspirants since 2002</div>
+            <div className="text-xs uppercase tracking-wider text-white/70">CUET &amp; IPMAT</div>
+            <div className="mt-1 h-display text-2xl text-white">4 Delhi-NCR centres</div>
+            <div className="text-xs text-white/80">Noida · Hauz Khas · GTB Nagar · Gurugram</div>
           </div>
         </aside>
 

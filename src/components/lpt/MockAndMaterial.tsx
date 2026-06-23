@@ -2,19 +2,21 @@ import { FileText, ChevronRight, BookOpen, Star } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeader } from "./shared";
 
+// CUET + IPMAT only. Counts are qualitative (no fabricated test counts).
+// Each item links to the most relevant existing page (no dead "#" links).
 const tests = [
-  { name: "CAT Mock Test Series", count: "50+ Tests" },
-  { name: "CUET UG Mock Test", count: "30+ Tests" },
-  { name: "IPMAT Indore Mocks", count: "40+ Tests" },
-  { name: "JIPMAT Mock Series", count: "20+ Tests" },
-  { name: "Management UG Mocks", count: "25+ Tests" },
-  { name: "IIM Bangalore UG (IPMAT)", count: "15+ Tests" },
+  { name: "CUET UG Mock Series", count: "Full-length mocks", href: "/courses/cuet" },
+  { name: "IPMAT Indore Mock Series", count: "Full-length mocks", href: "/ipmat/exam" },
+  { name: "IPMAT Rohtak Mock Series", count: "Full-length mocks", href: "/ipmat/exam" },
+  { name: "JIPMAT Mock Series", count: "Full-length mocks", href: "/courses/ipmat" },
+  { name: "CUET Sectional Tests", count: "Topic-wise drills", href: "/cuet/syllabus" },
+  { name: "IPMAT Sectional Tests", count: "Topic-wise drills", href: "/ipmat/syllabus" },
 ];
 
 const material = [
-  { name: "IPMAT Study Material", desc: "Concept book · Practice set · PYQ" },
-  { name: "CUET UG Study Material", desc: "27 subjects · NCERT-aligned" },
-  { name: "CAT Modules", desc: "QA · VARC · LRDI complete set" },
+  { name: "IPMAT Study Material", desc: "Concept book · Practice set · PYQ", href: "/ipmat/books-mocks" },
+  { name: "CUET UG Study Material", desc: "Domain · General · Language", href: "/cuet/syllabus" },
+  { name: "IPMAT QA & Verbal Modules", desc: "Complete theory + PYQs", href: "/ipmat/syllabus" },
 ];
 
 export function MockAndMaterial() {
@@ -33,7 +35,7 @@ export function MockAndMaterial() {
               {tests.map((t) => (
                 <li key={t.name}>
                   <a
-                    href="#"
+                    href={t.href}
                     className="group relative flex h-full items-center justify-between gap-4 overflow-hidden rounded-2xl border border-hairline bg-white p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-brand/30 hover:shadow-[0_8px_30px_rgba(218,32,47,0.06)] hover:-translate-y-1"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-[#FFF5F5] to-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -154,13 +156,13 @@ export function MockAndMaterial() {
               align="left"
               eyebrow="Study Material"
               title={<>Books Built by the People Who <span className="text-brand">Set the Bar</span></>}
-              subtitle="Authored by senior mentors with decades of CAT/IPM experience — not freelancers."
+              subtitle="Authored by senior mentors with deep CUET & IPMAT experience — not freelancers."
             />
             <ul className="mt-8 space-y-4">
               {material.map((m) => (
                 <li key={m.name}>
                   <a
-                    href="#"
+                    href={m.href}
                     className="group relative flex items-center justify-between gap-4 overflow-hidden rounded-2xl border border-hairline bg-white p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:border-brand/30 hover:shadow-[0_8px_30px_rgba(218,32,47,0.08)] hover:-translate-y-1"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-[#FFF5F5] to-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

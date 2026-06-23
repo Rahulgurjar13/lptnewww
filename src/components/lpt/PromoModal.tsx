@@ -38,9 +38,10 @@ export function PromoModal({ onBook }: { onBook: () => void }) {
             </span>
             Limited Time Offer
           </div>
-          <h3 className="mt-5 font-display text-[22px] font-bold leading-tight text-ink">Win up to 100% Scholarship</h3>
+          <h3 className="mt-5 font-display text-[22px] font-bold leading-tight text-ink">Apply for the LPT Scholarship</h3>
           <p className="mt-3 text-[14px] leading-relaxed text-body">
-            Take the LPT Scholarship Admission Test (LSAT) this Sunday. <strong className="font-semibold text-ink">5,000+ students</strong> have already benefitted, with an average award of <strong className="font-semibold text-ink">₹42,000</strong>.
+            Take the LPT Scholarship Admission Test for CUET &amp; IPMAT batches. Scholarship amounts and
+            eligibility are confirmed during counselling — book a free slot to know yours.
           </p>
           
           <div className="mt-8 flex flex-col gap-2">

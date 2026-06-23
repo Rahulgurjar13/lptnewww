@@ -1,160 +1,70 @@
 import { Reveal } from "./Reveal";
-import { SectionHeader } from "./shared";
-import {
-  Users,
-  GraduationCap,
-  BookMarked,
-  FileCheck2,
-  Headphones,
-  Trophy,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react";
+import { SectionHeader, Tbd } from "./shared";
+import { Users, GraduationCap, BookMarked, FileCheck2, Headphones, Trophy, Sparkles } from "lucide-react";
 
-/* ── Data ─────────────────────────────────────────────── */
-const hero = {
-  stat: "24",
-  unit: "Years",
-  label: "of Legacy",
-  desc: "Founded by IIM faculty. Every founder has sat on the other side of the CAT paper.",
-  cta: "Our story",
-};
-
+/**
+ * WhyLPT — value proposition. CUET + IPMAT only. Specific unverified numbers
+ * (years of legacy, IIM-call counts, avg faculty experience) render as marked
+ * placeholders; only qualitative, defensible claims are stated outright.
+ */
 const pillars = [
-  {
-    icon: Users,
-    stat: "10+",
-    title: "Yrs Avg Faculty",
-    desc: "Every mentor has at least a decade of CAT / IPM teaching under their belt.",
-  },
-  {
-    icon: GraduationCap,
-    stat: "100+",
-    title: "IIM Calls Last Cycle",
-    desc: "Verifiable selections — not marketing numbers. Ask us for the list.",
-  },
-  {
-    icon: BookMarked,
-    stat: "100%",
-    title: "Original Study Material",
-    desc: "Modules rewritten every year. Zero photocopies. Always exam-relevant.",
-  },
-  {
-    icon: FileCheck2,
-    stat: "AI",
-    title: "Adaptive Test Series",
-    desc: "AI-graded mocks pinpoint your exact weak areas and auto-schedule drills.",
-  },
-  {
-    icon: Headphones,
-    stat: "1-on-1",
-    title: "Mentorship Access",
-    desc: "Direct line to your mentor — not a chatbot, not a call centre.",
-  },
+  { icon: Users, stat: null as string | null, statLabel: "avg faculty exp.", title: "Experienced Faculty", desc: "Mentors who teach CUET and IPMAT full-time — not part-time freelancers." },
+  { icon: GraduationCap, stat: null, statLabel: "selections", title: "Verified Selections", desc: "We publish selections only when they're verifiable. Ask us for the list." },
+  { icon: BookMarked, stat: "In-house", statLabel: "", title: "Original Study Material", desc: "Modules authored in-house and revised to the latest exam pattern." },
+  { icon: FileCheck2, stat: "Adaptive", statLabel: "", title: "Test Series", desc: "Proctored mocks that pinpoint weak areas and benchmark your prep." },
+  { icon: Headphones, stat: "1-on-1", statLabel: "", title: "Mentorship Access", desc: "A direct line to your mentor — not a chatbot or a call centre." },
 ];
 
-/* ── Component ────────────────────────────────────────── */
 export function WhyLPT() {
   return (
     <section className="py-12 md:py-16">
       <div className="container-lpt">
-
         <SectionHeader
-          eyebrow="Why LPT"
-          title={<>Why Aspirants Trust <span className="text-brand">LPT</span></>}
+          eyebrow="Why Us"
+          title={<>Why Aspirants Choose <span className="text-brand">LPT Delhi-NCR</span></>}
           subtitle="It's not the videos, the tests, or the slogans — it's the people behind them."
         />
 
-        {/* ═══════════════════════════════════════════
-            ROW 1  —  Hero card (left) + 2 tall cards (right)
-        ══════════════════════════════════════════════ */}
         <div className="mt-14 grid gap-5 md:grid-cols-3">
-
-          {/* ── Hero: 24 Years ── */}
+          {/* Hero card */}
           <Reveal className="md:col-span-2">
-            <article
-              className="lift-card group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white p-9"
-              style={{ minHeight: "240px" }}
-            >
-              {/* Warm radial wash */}
-              <div
-                className="absolute inset-0 -z-10"
-                style={{
-                  background:
-                    "radial-gradient(65% 80% at 95% 5%, #FFEED7 0%, transparent 65%)",
-                }}
-              />
-
-              {/* Decorative large number watermark */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute right-6 top-0 select-none font-black leading-none text-brand/[0.06]"
-                style={{
-                  fontSize: "9rem",
-                  fontFamily: "var(--font-display)",
-                  letterSpacing: "-0.04em",
-                }}
-              >
-                24
-              </span>
-
+            <article className="lift-card group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white p-9" style={{ minHeight: "240px" }}>
+              <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(65% 80% at 95% 5%, #FFEED7 0%, transparent 65%)" }} />
               <div className="flex h-full flex-col justify-between">
                 <div>
-                  {/* Icon bubble */}
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cream text-brand">
                     <Trophy className="h-6 w-6" strokeWidth={1.75} />
                   </span>
-
-                  {/* Stat callout */}
                   <div className="mt-5 flex items-end gap-2">
-                    <span
-                      className="h-display leading-none text-brand"
-                      style={{ fontSize: "clamp(3rem, 6vw, 4rem)", letterSpacing: "-0.03em" }}
-                    >
-                      {hero.stat}
+                    <span className="h-display leading-none text-brand" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.03em" }}>
+                      <Tbd label="years" />
                     </span>
-                    <span className="mb-1 text-xl font-bold text-ink/60">
-                      {hero.unit} {hero.label}
-                    </span>
+                    <span className="mb-1 text-xl font-bold text-ink/60">of teaching legacy</span>
                   </div>
-
                   <p className="mt-3 max-w-sm text-[0.88rem] leading-relaxed text-body">
-                    {hero.desc}
+                    A team of CUET and IPMAT specialists across 4 Delhi-NCR centres. Add the verified
+                    founding year and legacy figure here before publishing.
                   </p>
                 </div>
-
-                <a
-                  href="#"
-                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all hover:gap-3"
-                >
-                  {hero.cta} <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                </a>
               </div>
             </article>
           </Reveal>
 
-          {/* ── Pillar 0: Faculty ── */}
+          {/* First pillar */}
           <Reveal delay={80}>
             <article className="lift-card group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white p-7 transition-colors hover:border-brand/25">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-cream text-brand">
                 <Users className="h-5 w-5" strokeWidth={1.75} />
               </span>
-              <p
-                className="mt-4 h-display leading-none text-brand"
-                style={{ fontSize: "2.25rem", letterSpacing: "-0.03em" }}
-              >
-                {pillars[0].stat}
+              <p className="mt-4 h-display leading-none text-brand" style={{ fontSize: "1.75rem" }}>
+                {pillars[0].stat ?? <Tbd label={pillars[0].statLabel} />}
               </p>
               <h3 className="mt-1.5 h-display text-[1.05rem] leading-snug">{pillars[0].title}</h3>
               <p className="mt-2 text-[0.8rem] leading-relaxed text-body">{pillars[0].desc}</p>
             </article>
           </Reveal>
-
         </div>
 
-        {/* ═══════════════════════════════════════════
-            ROW 2  —  4 even cards (fills perfectly)
-        ══════════════════════════════════════════════ */}
         <div className="mt-5 grid gap-5 sm:grid-cols-2 md:grid-cols-4">
           {pillars.slice(1).map((f, i) => {
             const Icon = f.icon;
@@ -164,11 +74,8 @@ export function WhyLPT() {
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cream text-brand">
                     <Icon className="h-5 w-5" strokeWidth={1.75} />
                   </span>
-                  <p
-                    className="mt-4 h-display leading-none text-brand"
-                    style={{ fontSize: "1.6rem", letterSpacing: "-0.02em" }}
-                  >
-                    {f.stat}
+                  <p className="mt-4 h-display leading-none text-brand" style={{ fontSize: "1.4rem" }}>
+                    {f.stat ?? <Tbd label={f.statLabel} />}
                   </p>
                   <h3 className="mt-1 h-display text-[0.95rem] leading-snug">{f.title}</h3>
                   <p className="mt-2 text-[0.78rem] leading-relaxed text-body">{f.desc}</p>
@@ -178,19 +85,13 @@ export function WhyLPT() {
           })}
         </div>
 
-        {/* ── Bottom tagline ── */}
         <Reveal delay={400}>
           <div className="mt-10 flex items-center justify-center gap-2.5">
             <Sparkles className="h-4 w-4 text-brand" strokeWidth={1.75} />
-            <p className="text-[0.82rem] font-medium text-body">
-              Trusted by <span className="font-bold text-ink">1,50,000+ students</span> across India since 2001.
-            </p>
+            <p className="text-[0.82rem] font-medium text-body">CUET &amp; IPMAT coaching across 4 Delhi-NCR centres.</p>
           </div>
         </Reveal>
-
       </div>
     </section>
   );
 }
-
-

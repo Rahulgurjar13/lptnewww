@@ -1,12 +1,18 @@
-import { CountUp, Reveal } from "./Reveal";
-import { Eyebrow } from "./shared";
+import { Reveal } from "./Reveal";
+import { Eyebrow, Tbd } from "./shared";
 import { ArrowRight, GraduationCap, Calendar, BookOpen, Users } from "lucide-react";
+import { CENTRES } from "@/config/site";
 
+/**
+ * TrackRecord — headline metrics. Only the verifiable metric (centre count) is
+ * stated; all unverified figures render as marked placeholders (SOP: no
+ * fabricated numbers).
+ */
 const stats = [
-  { v: 100, s: "+", label: "IIM Calls in 2025", icon: <GraduationCap className="h-5 w-5" strokeWidth={1.75} />, size: "lg" },
-  { v: 24, s: "+", label: "Years of Legacy", icon: <Calendar className="h-5 w-5" strokeWidth={1.75} />, size: "sm" },
-  { v: 10, s: "+", label: "Yr Avg Teacher Exp.", icon: <BookOpen className="h-5 w-5" strokeWidth={1.75} />, size: "sm" },
-  { v: 150000, s: "+", label: "Students Mentored", icon: <Users className="h-5 w-5" strokeWidth={1.75} />, size: "lg" },
+  { value: null as string | null, label: "Verified Selections", icon: <GraduationCap className="h-5 w-5" strokeWidth={1.75} />, placeholder: "count" },
+  { value: null, label: "Years of Legacy", icon: <Calendar className="h-5 w-5" strokeWidth={1.75} />, placeholder: "years" },
+  { value: null, label: "Avg Teacher Experience", icon: <BookOpen className="h-5 w-5" strokeWidth={1.75} />, placeholder: "years" },
+  { value: String(CENTRES.length), label: "Delhi-NCR Centres", icon: <Users className="h-5 w-5" strokeWidth={1.75} />, placeholder: "" },
 ];
 
 export function TrackRecord({ onBook }: { onBook: () => void }) {
@@ -20,31 +26,23 @@ export function TrackRecord({ onBook }: { onBook: () => void }) {
               <div>
                 <Eyebrow>Track Record</Eyebrow>
                 <h2 className="mt-3 h-display text-3xl sm:text-4xl md:text-5xl">
-                  LPT's Track Record of <span className="text-brand">Trust</span> &amp; Results
+                  Our Track Record of <span className="text-brand">Trust</span> &amp; Results
                 </h2>
                 <p className="mt-5 max-w-md text-body">
-                  Two decades of teaching India's brightest aspirants. The numbers tell the story —
-                  but the careers we've shaped tell it louder.
+                  CUET and IPMAT coaching across Delhi-NCR. Verified figures will be filled in here —
+                  we publish numbers only when they're confirmed.
                 </p>
                 <button onClick={onBook} className="btn-primary mt-8">
                   Schedule a Free Session <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                 </button>
               </div>
 
-              {/* Bento stat grid */}
               <div className="grid grid-cols-2 gap-4 md:gap-5">
-                {stats.map((s, i) => (
-                  <div
-                    key={s.label}
-                    className={
-                      "lift-card rounded-3xl border border-white/60 bg-white p-6 " +
-                      (s.size === "lg" ? "md:col-span-1 md:row-span-1" : "")
-                    }
-                  >
+                {stats.map((s) => (
+                  <div key={s.label} className="lift-card rounded-3xl border border-white/60 bg-white p-6">
                     <span className="icon-bubble">{s.icon}</span>
-                    <div className="mt-5 h-display text-3xl sm:text-4xl md:text-5xl">
-                      <CountUp to={s.v} />
-                      <span className="text-brand">{s.s}</span>
+                    <div className="mt-5 h-display text-3xl sm:text-4xl md:text-5xl text-ink">
+                      {s.value ?? <Tbd label={s.placeholder} />}
                     </div>
                     <div className="mt-1 text-sm font-medium text-body">{s.label}</div>
                   </div>
