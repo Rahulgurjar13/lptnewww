@@ -58,8 +58,10 @@ export function Scholarship() {
                   loading="lazy"
                   className="mx-auto h-72 w-72 object-contain drop-shadow-[0_24px_48px_rgba(218,32,47,0.18)] md:h-96 md:w-96"
                 />
-                <div className="absolute bottom-2 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-ink shadow-[0_8px_16px_rgba(0,0,0,0.08)]">
-                  <Trophy className="h-4 w-4 text-brand" strokeWidth={2} />
+                <div className="absolute bottom-2 left-1/2 inline-flex -translate-x-1/2 whitespace-nowrap items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[11px] md:text-xs font-bold text-ink shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand/10">
+                    <Trophy className="h-3 w-3 text-brand" strokeWidth={2.5} />
+                  </span>
                   Free registration open
                 </div>
               </div>

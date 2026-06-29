@@ -43,7 +43,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
   return (
     <BookingContext.Provider value={{ openEnquiry, openSignIn }}>
       <Navbar overlay={isHome} onBook={openEnquiry} onSignIn={openSignIn} />
-      <main>{children}</main>
+      <main className="pb-20 lg:pb-0">{children}</main>
       <Footer />
       <MobileCTA onBook={openEnquiry} />
 

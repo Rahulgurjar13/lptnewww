@@ -82,25 +82,25 @@ export function Hero({ onBook }: { onBook: () => void }) {
         {/* RIGHT SIDE */}
         <Reveal delay={120}>
           <div className="relative mx-auto mt-12 w-full max-w-[500px] lg:mt-0 lg:max-w-none">
-            <div className="relative z-10 overflow-hidden rounded-3xl rounded-tl-[140px] shadow-2xl lg:h-[600px] h-[400px]">
+            <div className="relative z-10 overflow-hidden rounded-3xl rounded-tl-[100px] lg:rounded-tl-[140px] shadow-2xl lg:h-[600px] h-[520px]">
               <img src={hero1} alt="Students preparing for CUET and IPMAT" className="h-full w-full object-cover object-top" />
             </div>
 
             {/* Why card */}
-            <div className="absolute -left-2 sm:-left-8 lg:-left-16 top-4 lg:top-16 z-20 flex w-[220px] lg:w-[280px] -rotate-3 flex-col rounded-xl bg-white p-5 lg:p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border border-gray-100 transition-transform duration-500 hover:-translate-y-2 hover:-rotate-1">
-              <h3 className="flex items-center gap-2 text-ink leading-none">
-                <span className="text-[44px] text-gray-800 -rotate-2" style={{ fontFamily: "'Caveat', cursive" }}>Why</span>
-                <span className="relative text-brand font-bold font-display text-[28px] tracking-tight">
+            <div className="absolute -left-2 sm:-left-8 lg:-left-16 -top-6 lg:top-16 z-20 flex w-[160px] lg:w-[280px] -rotate-3 flex-col rounded-xl bg-white p-3 lg:p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border border-gray-100 transition-transform duration-500 hover:-translate-y-2 hover:-rotate-1">
+              <h3 className="flex items-center gap-1.5 lg:gap-2 text-ink leading-none">
+                <span className="text-[28px] lg:text-[44px] text-gray-800 -rotate-2" style={{ fontFamily: "'Caveat', cursive" }}>Why</span>
+                <span className="relative text-brand font-bold font-display text-[18px] lg:text-[28px] tracking-tight">
                   Us?
                   <svg className="absolute -bottom-1 left-0 w-full overflow-visible" viewBox="0 0 100 12" preserveAspectRatio="none">
                     <path d="M2 10 Q 30 2 60 8 T 100 6" stroke="#DA202F" strokeWidth="3.5" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
                   </svg>
                 </span>
               </h3>
-              <ul className="mt-7 space-y-4">
+              <ul className="mt-4 lg:mt-7 space-y-2 lg:space-y-4">
                 {["Experienced Mentors", "CUET & IPMAT Focus", "Structured Courses", "Personalised Guidance", "4 Delhi-NCR Centres"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3.5 text-sm font-semibold text-ink/80">
-                    <CheckCircle2 className="h-5 w-5 text-[#DE2B3A] shrink-0" strokeWidth={2} />
+                  <li key={i} className="flex items-center gap-1.5 lg:gap-3.5 text-[10px] lg:text-sm font-semibold text-ink/80 leading-tight">
+                    <CheckCircle2 className="h-3.5 w-3.5 lg:h-5 lg:w-5 text-[#DE2B3A] shrink-0" strokeWidth={2} />
                     {item}
                   </li>
                 ))}
@@ -108,13 +108,13 @@ export function Hero({ onBook }: { onBook: () => void }) {
             </div>
 
             {/* Floating badge */}
-            <div className="absolute -bottom-4 right-2 lg:-bottom-6 lg:-right-6 z-30 flex items-center gap-3 lg:gap-4 rounded-[2.5rem] bg-white p-2 lg:p-2.5 pr-6 lg:pr-8 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.12)] border border-gray-50 transition-transform duration-500 hover:-translate-y-2 hover:rotate-2">
-              <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#DE2B3A] text-white shadow-inner">
-                <Award className="h-7 w-7" strokeWidth={2.5} />
+            <div className="absolute -bottom-5 left-4 lg:left-auto lg:-bottom-6 lg:-right-6 z-30 flex items-center gap-2 lg:gap-4 rounded-[2.5rem] bg-white p-1.5 lg:p-2.5 pr-4 lg:pr-8 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.12)] border border-gray-50 transition-transform duration-500 hover:-translate-y-2 hover:rotate-2">
+              <div className="flex h-[36px] w-[36px] lg:h-[56px] lg:w-[56px] shrink-0 items-center justify-center rounded-full bg-[#DE2B3A] text-white shadow-inner">
+                <Award className="h-5 w-5 lg:h-7 lg:w-7" strokeWidth={2.5} />
               </div>
               <div className="flex flex-col justify-center">
-                <div className="text-[12px] text-slate-500 font-medium leading-tight">Your Dream College</div>
-                <div className="font-display text-[15px] font-bold text-ink leading-tight mt-0.5">Starts With the Right Prep</div>
+                <div className="text-[10px] lg:text-[12px] text-slate-500 font-medium leading-tight">Your Dream College</div>
+                <div className="font-display text-[11px] lg:text-[15px] font-bold text-ink leading-tight mt-0.5">Starts With the Right Prep</div>
               </div>
             </div>
           </div>

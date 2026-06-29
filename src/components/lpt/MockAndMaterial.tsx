@@ -65,7 +65,7 @@ export function MockAndMaterial() {
 
       <section className="py-12 md:py-16">
         <div className="container-lpt grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <Reveal className="h-full">
+          <Reveal className="h-full order-2 lg:order-1 mt-6 lg:mt-0">
             <div className="relative h-full min-h-[480px] overflow-hidden rounded-[28px] bg-[#FFEED7] flex flex-col">
               {/* Very subtle dot grid, no glowing blobs */}
               <div
@@ -151,7 +151,7 @@ export function MockAndMaterial() {
               </div>
             </div>
           </Reveal>
-          <div>
+          <div className="order-1 lg:order-2">
             <SectionHeader
               align="left"
               eyebrow="Study Material"
