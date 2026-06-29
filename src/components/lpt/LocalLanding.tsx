@@ -3,7 +3,8 @@ import { ContentPage, Section } from "@/components/seo/ContentPage";
 import { ComparisonTable } from "@/components/seo/ComparisonTable";
 import { courseSchema, localBusinessSchema } from "@/lib/schema";
 import { BRAND_SHORT, CENTRES, getCentre, canonical } from "@/config/site";
-import { Tbd } from "./shared";
+import { CUET_BATCHES, IPMAT_BATCHES } from "@/data/courses";
+import { IIM_SELECTIONS_2YR } from "@/data/results";
 import type { FAQItem } from "@/components/seo/FAQ";
 
 /**
@@ -124,24 +125,30 @@ export function LocalLanding({ vertical, area }: { vertical: LandingVertical; ar
       <Section id="batches" heading={`${vertical} batches & fees in ${area.label}`}>
         <p>
           <strong className="text-ink">In short:</strong> {area.label} students can join {vertical}{" "}
-          live, crash or test-series batches in offline, online or hybrid mode. Fees are confirmed
-          during counselling — no "enquire for price".
+          batches in offline, online or hybrid mode. Fees below are for our GTB Nagar (Delhi) centre,
+          excl. GST — no "enquire for price".
         </p>
         <ComparisonTable
-          caption={`${vertical} batches at ${BRAND_SHORT} ${area.label}`}
-          date="to be confirmed"
+          caption={`${vertical} batches at ${BRAND_SHORT} — fees excl. GST`}
+          date="28 Jun 2026"
           source={BRAND_SHORT}
-          illustrative
           columns={[
             { key: "batch", header: "Batch" },
-            { key: "mode", header: "Mode" },
-            { key: "fee", header: "Fee" },
+            { key: "duration", header: "Duration" },
+            { key: "fee", header: "Fee (excl. GST)" },
           ]}
-          rows={[
-            { batch: `${vertical} Live`, mode: "Offline / Online / Hybrid", fee: <Tbd label="fee" /> },
-            { batch: `${vertical} Crash Course`, mode: "Online", fee: <Tbd label="fee" /> },
-            { batch: `${vertical} Test Series`, mode: "Online", fee: <Tbd label="fee" /> },
-          ]}
+          rows={(vertical === "CUET" ? CUET_BATCHES : IPMAT_BATCHES).map((b) => ({
+            batch: b.name,
+            duration: b.duration,
+            fee: (
+              <>
+                <span className="font-semibold text-ink">{b.price}</span>
+                {b.originalPrice && (
+                  <span className="ml-2 text-xs text-body line-through">{b.originalPrice}</span>
+                )}
+              </>
+            ),
+          }))}
         />
         <Link to={courseHref(vertical)} className="inline-block text-sm font-semibold text-brand hover:underline">
           See full {vertical} course details →
@@ -177,8 +184,11 @@ export function LocalLanding({ vertical, area }: { vertical: LandingVertical; ar
 
       <Section id="results" heading={`${vertical} results in ${area.label}`}>
         <p>
-          Verified local and overall {vertical} selections will be listed here from confirmed records:{" "}
-          <Tbd label="local results" />. We publish results only when they are verifiable — never inflated.
+          Across {BRAND_SHORT}, our students have earned <strong className="text-ink">{IIM_SELECTIONS_2YR} IIM
+          selections in 2 years</strong>, including AIR 9, 22 and 24 at IIM Indore. See the full named
+          list on our{" "}
+          <Link to="/results" className="font-semibold text-brand hover:underline">results page</Link>. We
+          publish results only when they are verifiable — never inflated.
         </p>
       </Section>
     </ContentPage>

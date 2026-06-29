@@ -57,9 +57,9 @@ export const ipmatExam: ExamRow[] = [
   },
   {
     exam: "JIPMAT (Jammu, Bodh Gaya)",
-    questionsMarksTime: "per official bulletin",
-    sections: "QA · VA",
-    sectionalLock: "per official bulletin",
+    questionsMarksTime: "100 Q · 150 min",
+    sections: "QA · DILR · VA",
+    sectionalLock: "None",
     negativeMarking: "per official bulletin",
     verify: true,
   },

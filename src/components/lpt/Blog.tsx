@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import { SectionHeader, Tbd } from "./shared";
+import { SectionHeader } from "./shared";
 import b1 from "@/assets/blog-1.jpg";
 import b2 from "@/assets/blog-2.jpg";
 import b3 from "@/assets/blog-3.jpg";
@@ -32,8 +32,8 @@ export function Blog() {
               <article className="lift-card group block h-full overflow-hidden rounded-3xl border border-hairline bg-white">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <img src={p.img} alt={p.title} width={1024} height={640} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-ink backdrop-blur">
-                    <Tbd label="date" />
+                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-brand backdrop-blur">
+                    Guide
                   </span>
                 </div>
                 <div className="p-6">

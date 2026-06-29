@@ -4,6 +4,7 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { programmaticEmittedPaths, programmaticReportLines } from "./src/lib/programmatic";
+import { FACULTY } from "./src/data/faculty";
 
 // TanStack Start (SSR/SSG). Every route below is prerendered to static HTML so
 // critical content renders with JS disabled (SOP A1). We list pages explicitly
@@ -17,6 +18,8 @@ const PRERENDER_PAGES = [
   // Core / brand
   "/", "/about", "/contact", "/faculty", "/results", "/resources", "/privacy", "/terms",
   "/courses", "/courses/cuet", "/courses/ipmat",
+  // Faculty bios (real mentors)
+  ...FACULTY.map((f) => `/faculty/${f.slug}`),
   // Local pillar
   "/centres", ...CENTRE_SLUGS.map((s) => `/centres/${s}`),
   ...AREAS.map((a) => `/cuet/coaching-in-${a}`),

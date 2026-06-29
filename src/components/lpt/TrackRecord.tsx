@@ -2,16 +2,17 @@ import { Reveal } from "./Reveal";
 import { Eyebrow, Tbd } from "./shared";
 import { ArrowRight, GraduationCap, Calendar, BookOpen, Users } from "lucide-react";
 import { CENTRES } from "@/config/site";
+import { IIM_SELECTIONS_2YR } from "@/data/results";
+import { AVG_TEACHER_EXPERIENCE } from "@/data/faculty";
 
 /**
- * TrackRecord — headline metrics. Only the verifiable metric (centre count) is
- * stated; all unverified figures render as marked placeholders (SOP: no
- * fabricated numbers).
+ * TrackRecord — headline metrics. All figures here are verified (IIM selections,
+ * founding year, avg teacher experience, centre count).
  */
 const stats = [
-  { value: null as string | null, label: "Verified Selections", icon: <GraduationCap className="h-5 w-5" strokeWidth={1.75} />, placeholder: "count" },
-  { value: null, label: "Years of Legacy", icon: <Calendar className="h-5 w-5" strokeWidth={1.75} />, placeholder: "years" },
-  { value: null, label: "Avg Teacher Experience", icon: <BookOpen className="h-5 w-5" strokeWidth={1.75} />, placeholder: "years" },
+  { value: IIM_SELECTIONS_2YR as string | null, label: "IIM Selections", icon: <GraduationCap className="h-5 w-5" strokeWidth={1.75} />, placeholder: "count" },
+  { value: "2022", label: "Founded", icon: <Calendar className="h-5 w-5" strokeWidth={1.75} />, placeholder: "year" },
+  { value: `${AVG_TEACHER_EXPERIENCE} yrs`, label: "Avg Teacher Experience", icon: <BookOpen className="h-5 w-5" strokeWidth={1.75} />, placeholder: "years" },
   { value: String(CENTRES.length), label: "Delhi-NCR Centres", icon: <Users className="h-5 w-5" strokeWidth={1.75} />, placeholder: "" },
 ];
 

@@ -6,19 +6,15 @@
  * appear byte-identically everywhere (site, centre pages, footer, GBP, socials).
  * Drive every component/route from this file — never hardcode these elsewhere.
  *
- * ⚠️  NEEDS-REAL-DATA — these tokens are placeholders, NOT facts. Replace with
- *     verified values before publishing. Anything wrapped in "{{...}}" is unset.
- *       - PHONE                ({{PHONE}})            main NAP-consistent number
- *       - WHATSAPP             ({{WHATSAPP}})         wa.me link
- *       - EMAIL                ({{EMAIL}})            -> defaulted to info@lptdelhincr.com (confirm)
- *       - HEAD_OFFICE          ({{HEAD_OFFICE}})      full registered address
- *       - GST                  ({{GST}})              GST / registration no.
- *       - FOUNDED_YEAR         ({{FOUNDED_YEAR}})     founding year
- *       - SOCIAL.youtube/instagram/linkedin/x        official profile URLs
- *       - CENTRES[*].phone     ({{CENTRE_PHONE_*}})   per-centre GBP phone
- *       - CENTRES[*].geo       (APPROXIMATE)          set EXACT pin from each GBP
- *       - CENTRES[*].mapsUrl   ({{MAPS_*}})           Google Maps "directions" link
- *       - REAL_RESULTS         ({{REAL_RESULTS}})     verified selections only
+ * ✅  VERIFIED (28 Jun 2026, from the official LPTdelhincr content sheet + LPT
+ *     IPMAT results): PHONE, WHATSAPP, EMAIL, HEAD_OFFICE, GST, FOUNDED_YEAR,
+ *     REAL_RESULTS, SOCIAL.youtube, SOCIAL.instagram, and every centre's phone,
+ *     exact geo pin and Google Maps link.
+ *
+ * ⚠️  STILL NEEDS-REAL-DATA — anything wrapped in "{{...}}" is unset:
+ *       - SOCIAL.linkedin      ({{SOCIAL_LINKEDIN}})  LinkedIn page URL
+ *       - SOCIAL.x             ({{SOCIAL_X}})         X/Twitter profile URL
+ *     (Course fees/modes/dates and faculty bios are tracked in src/data/*.)
  * =============================================================================
  */
 
@@ -82,29 +78,31 @@ export const BRAND_SHORT = "LPT Delhi-NCR" as const;
 export const DOMAIN = "https://lptdelhincr.com" as const; // canonical host (non-www)
 /** Content last-updated date (ISO) — the genuine authoring date, used for
  *  Article/Dataset `dateModified` and "Last updated" labels. Bump on edits. */
-export const LAST_UPDATED = "2026-06-23" as const;
-export const LAST_UPDATED_DISPLAY = "23 Jun 2026" as const;
+export const LAST_UPDATED = "2026-06-28" as const;
+export const LAST_UPDATED_DISPLAY = "28 Jun 2026" as const;
 
-/** ⚠️ NEEDS-REAL-DATA */
-export const PHONE = "{{PHONE}}";
-/** ⚠️ NEEDS-REAL-DATA */
-export const WHATSAPP = "{{WHATSAPP}}"; // e.g. https://wa.me/91XXXXXXXXXX
-/** Confirm before publishing (SOP §0 default). */
-export const EMAIL = "info@lptdelhincr.com";
-/** ⚠️ NEEDS-REAL-DATA */
-export const HEAD_OFFICE = "{{HEAD_OFFICE}}";
-/** ⚠️ NEEDS-REAL-DATA */
-export const GST = "{{GST}}";
-/** ⚠️ NEEDS-REAL-DATA */
-export const FOUNDED_YEAR = "{{FOUNDED_YEAR}}";
-/** ⚠️ NEEDS-REAL-DATA — verified selections / IIM calls only, no inflation. */
-export const REAL_RESULTS = "{{REAL_RESULTS}}";
+/** Main NAP-consistent number (verified — official content sheet). */
+export const PHONE = "+91 87505 81505";
+/** WhatsApp deep-link base (verified). */
+export const WHATSAPP = "https://wa.me/918750581505";
+/** Official email (verified — official content sheet). */
+export const EMAIL = "lptdelhincr@gmail.com";
+/** Registered office (= Hauz Khas centre; NAP-consistent). */
+export const HEAD_OFFICE =
+  "Second Floor, 14, Kaushalya Park, Block R, Kharera, Hauz Khas, New Delhi, Delhi 110016";
+/** GST / registration no. (verified). */
+export const GST = "07AAECO5833E1ZJ";
+/** Founding year (verified). */
+export const FOUNDED_YEAR = "2022";
+/** Verified selections only, no inflation (source: LPT IPMAT results, 2024–25). */
+export const REAL_RESULTS =
+  "140+ IIM selections in 2 years — incl. AIR 9, 22 & 24 at IIM Indore";
 
 export const SOCIAL = {
-  /** ⚠️ NEEDS-REAL-DATA */ youtube: "{{SOCIAL_YOUTUBE}}",
-  /** ⚠️ NEEDS-REAL-DATA */ instagram: "{{SOCIAL_INSTAGRAM}}",
-  /** ⚠️ NEEDS-REAL-DATA */ linkedin: "{{SOCIAL_LINKEDIN}}",
-  /** ⚠️ NEEDS-REAL-DATA */ x: "{{SOCIAL_X}}",
+  youtube: "https://www.youtube.com/@LPTdelhi_ncr",
+  instagram: "https://www.instagram.com/lptdelhi_ncr",
+  /** ⚠️ NEEDS-REAL-DATA — LinkedIn page URL not yet supplied. */ linkedin: "{{SOCIAL_LINKEDIN}}",
+  /** ⚠️ NEEDS-REAL-DATA — X/Twitter profile URL not yet supplied. */ x: "{{SOCIAL_X}}",
 } as const;
 
 /** Verticals — CUET + IPMAT ONLY. No CAT/MBA/XAT/NMAT/SNAP anywhere. */
@@ -129,9 +127,9 @@ export const CENTRES: Centre[] = [
       "Ground Floor, Sandesh Tower, C-56/31, C Block, Phase 2, Sector 62, Noida, Uttar Pradesh 201309",
     landmark: "Sector 62; Sandesh Tower",
     areaServed: ["Noida", "Greater Noida", "Sector 62", "Indirapuram", "Ghaziabad"],
-    geo: { lat: 28.6276, lng: 77.3649, approximate: true },
-    phone: "{{CENTRE_PHONE_NOIDA}}", // ⚠️ NEEDS-REAL-DATA
-    mapsUrl: "{{MAPS_NOIDA}}", // ⚠️ NEEDS-REAL-DATA
+    geo: { lat: 28.6149708, lng: 77.3663164, approximate: false },
+    phone: "+91 92175 77449",
+    mapsUrl: "https://maps.app.goo.gl/nGdvJLghanMMdttx7",
     openingHours: "Mo-Su 09:00-19:00",
   },
   {
@@ -147,9 +145,9 @@ export const CENTRES: Centre[] = [
       "Second Floor, 14, Kaushalya Park, Block R, Kharera, Hauz Khas, New Delhi, Delhi 110016",
     landmark: "Near Vadilal Hangout; Hauz Khas",
     areaServed: ["Hauz Khas", "South Delhi", "Green Park", "Malviya Nagar", "SDA"],
-    geo: { lat: 28.5478, lng: 77.203, approximate: true },
-    phone: "{{CENTRE_PHONE_HAUZ_KHAS}}", // ⚠️ NEEDS-REAL-DATA
-    mapsUrl: "{{MAPS_HAUZ_KHAS}}", // ⚠️ NEEDS-REAL-DATA
+    geo: { lat: 28.5501264, lng: 77.2053068, approximate: false },
+    phone: "+91 92175 77446",
+    mapsUrl: "https://share.google/Wt1kovGjs7ymj3h0H",
     openingHours: "Mo-Su 09:00-19:00",
   },
   {
@@ -164,9 +162,9 @@ export const CENTRES: Centre[] = [
     fullAddress: "73-75, Ring Road, Mall Road, GTB Nagar, New Delhi, Delhi 110033",
     landmark: "Metro Gate No. 1, above Bank of Baroda",
     areaServed: ["GTB Nagar", "North Campus", "Kingsway Camp", "Model Town", "Mukherjee Nagar"],
-    geo: { lat: 28.6989, lng: 77.207, approximate: true },
-    phone: "{{CENTRE_PHONE_GTB_NAGAR}}", // ⚠️ NEEDS-REAL-DATA
-    mapsUrl: "{{MAPS_GTB_NAGAR}}", // ⚠️ NEEDS-REAL-DATA
+    geo: { lat: 28.6985817, lng: 77.2062094, approximate: false },
+    phone: "+91 92175 77445",
+    mapsUrl: "https://share.google/ayfCXtfs4Rczir9B8",
     openingHours: "Mo-Su 09:00-19:00",
   },
   {
@@ -181,9 +179,9 @@ export const CENTRES: Centre[] = [
     fullAddress: "Second Floor, M-35, Block M, Old DLF Colony, Sector 14, Gurugram, Haryana 122007",
     landmark: "Above HDFC Bank; Sector 14",
     areaServed: ["Gurugram", "Sector 14", "Old DLF Colony", "DLF Phase 1-3", "Sushant Lok"],
-    geo: { lat: 28.4669, lng: 77.0387, approximate: true },
-    phone: "{{CENTRE_PHONE_GURUGRAM}}", // ⚠️ NEEDS-REAL-DATA
-    mapsUrl: "{{MAPS_GURUGRAM}}", // ⚠️ NEEDS-REAL-DATA
+    geo: { lat: 28.4700664, lng: 77.0444957, approximate: false },
+    phone: "+91 92175 77448",
+    mapsUrl: "https://share.google/nLXEGLKYv82KSLcJK",
     openingHours: "Mo-Su 09:00-19:00",
   },
 ];

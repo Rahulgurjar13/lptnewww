@@ -1,12 +1,13 @@
-import { Play } from "lucide-react";
-import { SectionHeader, Tbd } from "./shared";
+import { Quote } from "lucide-react";
+import { SectionHeader } from "./shared";
+import { TESTIMONIALS } from "@/data/results";
 
 /**
- * VideoTestimonials — student story cards. CUET + IPMAT only. No fabricated
- * names, ranks, or YouTube IDs (the previous placeholder video id was removed).
- * Cards are clearly-marked placeholders until real, consented videos exist.
+ * Testimonials — real, named student stories (LPT IPMAT results). CUET + IPMAT
+ * only; no fabricated names or stock video. Rendered as an auto-scrolling
+ * marquee of quote cards (duplicated for a seamless loop).
  */
-const colors = ["#FFE9D2", "#FFD7CC", "#FFEED7", "#FCE3DA", "#FFEED7", "#FFD7CC"];
+const colors = ["#FFE9D2", "#FFD7CC", "#FFEED7", "#FCE3DA"];
 
 export function VideoTestimonials() {
   return (
@@ -15,39 +16,33 @@ export function VideoTestimonials() {
         <SectionHeader
           eyebrow="Student Stories"
           title={<>Why They Chose <span className="text-brand">LPT</span>?</>}
-          subtitle="Real, consented student videos — to be added before launch. No stock or fabricated stories."
+          subtitle="Real, named students now studying at the IIMs — in their own words."
         />
       </div>
 
       <div className="mt-12 overflow-hidden">
         <div className="marquee-track px-6">
-          {[...colors, ...colors].map((color, i) => (
-            <div
+          {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+            <figure
               key={i}
-              className="group lift-card relative flex h-[310px] w-[270px] shrink-0 flex-col overflow-hidden rounded-[28px] border border-dashed border-brand/30 bg-white p-2.5 text-left"
+              className="group relative flex w-[350px] shrink-0 flex-col overflow-hidden rounded-[28px] border border-black/[0.04] bg-white p-7 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] hover:border-black/[0.08]"
             >
-              <div
-                className="relative flex-1 w-full overflow-hidden rounded-[20px] border border-black/[0.04]"
-                style={{ background: `radial-gradient(circle at 20% 0%, ${color} 0%, transparent 80%), radial-gradient(circle at 90% 100%, #ffffff 0%, #f4f5f7 100%)` }}
-              >
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-brand/30 text-white">
-                    <Play className="h-4 w-4 translate-x-[1px] fill-current" strokeWidth={0} />
-                  </span>
-                </div>
-                <div className="absolute bottom-3 left-3 rounded-full bg-black/30 backdrop-blur-md px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white border border-white/10">
-                  Video to be added
-                </div>
+              <div>
+                <span
+                  className="grid h-12 w-12 place-items-center rounded-full text-[#DA202F] shadow-sm"
+                  style={{ background: colors[i % colors.length] }}
+                >
+                  <Quote className="h-5 w-5 fill-current" strokeWidth={0} />
+                </span>
+                <blockquote className="mt-6 text-[15px] leading-relaxed text-body/90">
+                  "{t.quote}"
+                </blockquote>
               </div>
-              <div className="px-3 pb-3 pt-4">
-                <div className="font-bold text-ink text-[1.1rem] leading-tight">
-                  <Tbd label="student name" />
-                </div>
-                <div className="mt-1.5 text-[0.75rem] font-bold uppercase tracking-wider text-brand">
-                  <Tbd label="CUET / IPMAT outcome" />
-                </div>
-              </div>
-            </div>
+              <figcaption className="mt-8 border-t border-black/5 pt-5 flex-1 flex flex-col justify-end">
+                <div className="font-display text-[17px] font-bold text-ink">{t.name}</div>
+                <div className="mt-0.5 text-[11px] font-bold uppercase tracking-wider text-[#DA202F]">{t.institute}</div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

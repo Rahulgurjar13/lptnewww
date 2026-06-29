@@ -5,10 +5,10 @@ import scholarship from "@/assets/scholarship.png";
 
 // Unverified scholarship figures render as marked placeholders (no fabrication).
 const stats = [
-  { value: null as string | null, label: "Max Scholarship", placeholder: "%" },
-  { value: null, label: "Students Benefited", placeholder: "count" },
-  { value: null, label: "Awarded / Year", placeholder: "amount" },
-  { value: null, label: "Eligible Courses", placeholder: "count" },
+  { value: "100%" as string | null, label: "Max Scholarship", placeholder: "%" },
+  { value: "4,295+", label: "Test Registrations", placeholder: "count" },
+  { value: "Free", label: "Registration Fee", placeholder: "amount" },
+  { value: "2", label: "Eligible Courses", placeholder: "count" },
 ];
 
 export function Scholarship() {
@@ -35,13 +35,15 @@ export function Scholarship() {
                     Apply for IPMAT <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                   </button>
                 </div>
-                <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
+                <div className="mt-10 flex flex-wrap gap-8 sm:gap-10 lg:gap-12">
                   {stats.map((s) => (
-                    <div key={s.label}>
-                      <div className="h-display text-3xl text-ink">
+                    <div key={s.label} className="flex flex-col">
+                      <span className="font-display text-3xl md:text-[40px] font-bold tracking-tight text-ink drop-shadow-sm">
                         {s.value ?? <Tbd label={s.placeholder} />}
-                      </div>
-                      <div className="mt-1 text-xs uppercase tracking-wider text-body">{s.label}</div>
+                      </span>
+                      <span className="mt-1.5 text-sm md:text-[15px] font-medium text-body/80">
+                        {s.label}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -58,7 +60,7 @@ export function Scholarship() {
                 />
                 <div className="absolute bottom-2 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-ink shadow-[0_8px_16px_rgba(0,0,0,0.08)]">
                   <Trophy className="h-4 w-4 text-brand" strokeWidth={2} />
-                  Next test date <Tbd label="date" />
+                  Free registration open
                 </div>
               </div>
             </div>

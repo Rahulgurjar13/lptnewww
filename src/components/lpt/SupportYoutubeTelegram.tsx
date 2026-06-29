@@ -1,6 +1,6 @@
 import { Phone, Youtube, Send, Check, ArrowRight } from "lucide-react";
-import { SectionHeader, Tbd } from "./shared";
-import { PHONE, isPlaceholder, telLink, whatsappLink } from "@/config/site";
+import { SectionHeader } from "./shared";
+import { PHONE, SOCIAL, telLink, whatsappLink } from "@/config/site";
 import phone from "@/assets/telegram-phone.png";
 
 /**
@@ -19,7 +19,6 @@ const channels = [
 ];
 
 export function SupportYoutubeTelegram() {
-  const phoneKnown = !isPlaceholder(PHONE);
   return (
     <>
       {/* Support desk */}
@@ -38,7 +37,7 @@ export function SupportYoutubeTelegram() {
                   {d.label}
                 </div>
                 <div className="mt-2 font-display text-[1.5rem] font-bold tracking-tight text-ink">
-                  {phoneKnown ? <a href={telLink(PHONE)} className="hover:text-brand">{PHONE}</a> : <Tbd label="phone" />}
+                  <a href={telLink(PHONE)} className="hover:text-brand">{PHONE}</a>
                 </div>
                 <div className="mt-1.5 text-[11px] font-medium text-body/70">{d.hours}</div>
               </div>
@@ -53,11 +52,11 @@ export function SupportYoutubeTelegram() {
           <SectionHeader
             eyebrow="YouTube"
             title={<>Free Classes on <span className="text-brand">YouTube</span></>}
-            subtitle="CUET and IPMAT lectures, free. Channel links and subscriber counts to be added before launch."
+            subtitle="CUET and IPMAT lectures, free on our YouTube channel."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:max-w-4xl lg:mx-auto">
             {channels.map((c, i) => (
-              <div key={c.name} className="group lift-card flex flex-col overflow-hidden rounded-[2rem] border border-hairline bg-white shadow-sm">
+              <a key={c.name} href={SOCIAL.youtube} target="_blank" rel="noopener" className="group lift-card flex flex-col overflow-hidden rounded-[2rem] border border-hairline bg-white shadow-sm">
                 <div className="relative aspect-video overflow-hidden bg-ink">
                   {i === 0 ? (
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#DA202F]/60 via-ink to-ink" />
@@ -76,11 +75,13 @@ export function SupportYoutubeTelegram() {
                 <div className="flex flex-1 flex-col justify-between p-6 md:p-8">
                   <div>
                     <div className="font-display text-2xl font-bold text-ink">{c.name}</div>
-                    <div className="mt-2 text-[0.85rem] font-medium text-body/80"><Tbd label="subscribers" /></div>
+                    <div className="mt-2 text-[0.85rem] font-medium text-body/80">Free {c.track} lectures &amp; strategy</div>
                   </div>
-                  <div className="mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand/70">Channel link to be added</div>
+                  <div className="mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand/70">
+                    Watch on YouTube <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.5} />
+                  </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

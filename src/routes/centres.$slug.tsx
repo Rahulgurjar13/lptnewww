@@ -123,10 +123,21 @@ function CentrePage() {
             </a>
           )}
         </div>
-        <p className="text-xs italic text-body/60">
-          Areas served: {centre.areaServed.join(", ")}. (Map embed &amp; exact pin to be added from the
-          Google Business Profile.)
+        <p className="mt-6 text-sm">
+          <strong className="text-ink">Areas served:</strong> {centre.areaServed.join(", ")}.
         </p>
+        <div className="mt-4 aspect-video w-full overflow-hidden rounded-2xl border border-black/[0.06] bg-[#FDF6EC] shadow-sm">
+          <iframe
+            title={`Map location for ${BRAND_SHORT} ${centre.area}`}
+            src={`https://maps.google.com/maps?q=${centre.geo.lat},${centre.geo.lng}&hl=en&z=16&output=embed`}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </Section>
 
       <Section id="batches" heading={`CUET & IPMAT batches at ${centre.area}`}>

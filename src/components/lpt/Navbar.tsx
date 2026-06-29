@@ -101,7 +101,7 @@ export function Navbar({
                 </button>
               </li>
             ))}
-            <li onMouseEnter={() => setOpen("Centres")}>
+            <li onMouseEnter={() => setOpen("Centres")} className="relative">
               <button
                 className={`${topLink} flex items-center gap-1 ${activeVertical === "Centres" ? "text-brand" : ""}`}
                 aria-haspopup="true"
@@ -112,6 +112,31 @@ export function Navbar({
                 Centres
                 <ChevronDown className="h-3.5 w-3.5" strokeWidth={2.2} />
               </button>
+              {open === "Centres" && (
+                <div className="absolute left-1/2 top-full w-[280px] -translate-x-1/2 pt-5">
+                  <div className="fade-up overflow-hidden rounded-2xl border border-black/[0.04] bg-white p-2.5 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                    <ul className="space-y-1">
+                      {CENTRES.map((c) => (
+                        <li key={c.slug}>
+                          <a
+                            href={`/centres/${c.slug}`}
+                            onClick={() => setOpen(null)}
+                            className="group block rounded-xl p-3 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30"
+                          >
+                            <span className="block text-[13px] font-bold text-ink transition-colors group-hover:text-brand">{c.area}</span>
+                            <span className="mt-0.5 block text-[11px] text-slate-500">{c.landmark}</span>
+                          </a>
+                        </li>
+                      ))}
+                      <li className="border-t border-hairline pt-1 mt-1">
+                        <a href="/centres" onClick={() => setOpen(null)} className="block rounded-xl p-3 text-[13px] font-bold text-brand hover:bg-[#FFF5F5] transition-colors">
+                          All centres →
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
             </li>
             <li onMouseEnter={() => setOpen(null)}>
               <a href="/resources" className={topLink}>Resources</a>
@@ -147,11 +172,10 @@ export function Navbar({
           </button>
         </div>
 
-        {/* Desktop mega / dropdown panels */}
+        {/* Desktop mega panels */}
         {(open === "CUET" || open === "IPMAT") && (
           <MegaPanel vertical={open} onBook={onBook} onClose={() => setOpen(null)} />
         )}
-        {open === "Centres" && <CentresPanel onClose={() => setOpen(null)} />}
       </nav>
 
       {mobile && (
@@ -228,36 +252,7 @@ function MegaPanel({ vertical, onBook, onClose }: { vertical: Vertical; onBook: 
   );
 }
 
-/* ---- Desktop Centres dropdown ---- */
-function CentresPanel({ onClose }: { onClose: () => void }) {
-  return (
-    <div className="absolute inset-x-0 top-full hidden lg:block">
-      <div className="container-lpt">
-        <div className="fade-up ml-auto w-[320px] overflow-hidden rounded-3xl border border-hairline bg-white p-3 shadow-[0_8px_16px_rgba(0,0,0,0.05),0_24px_48px_rgba(0,0,0,0.08)]">
-          <ul className="space-y-1">
-            {CENTRES.map((c) => (
-              <li key={c.slug}>
-                <a
-                  href={`/centres/${c.slug}`}
-                  onClick={onClose}
-                  className="group block rounded-xl p-2.5 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30"
-                >
-                  <span className="block text-[13px] font-bold text-ink group-hover:text-brand">{c.area}</span>
-                  <span className="mt-0.5 block text-[11px] text-slate-500">{c.landmark}</span>
-                </a>
-              </li>
-            ))}
-            <li className="border-t border-hairline pt-1">
-              <a href="/centres" onClick={onClose} className="block rounded-xl p-2.5 text-[13px] font-bold text-brand hover:bg-[#FFF5F5]">
-                All centres →
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
+
 
 /* ---- Mobile slide-in drawer (accordion) ---- */
 function MobileDrawer({ onClose, onBook, onSignIn }: { onClose: () => void; onBook: () => void; onSignIn: () => void }) {

@@ -3,16 +3,17 @@ import { pageHead } from "@/lib/head";
 import { ContentPage, Section } from "@/components/seo/ContentPage";
 import { itemListSchema } from "@/lib/schema";
 import { BRAND } from "@/config/site";
-import { Tbd } from "@/components/lpt/shared";
+import { FACULTY } from "@/data/faculty";
 
 /**
- * Faculty index (SOP H1 — ItemList). Faculty MUST be real (E-E-A-T); no
- * profiles are seeded, so this shows placeholder slots until verified bios,
- * credentials and photos are added.
+ * Faculty index (SOP H1 — ItemList). Real LPT mentors (E-E-A-T) from the
+ * verified faculty dataset.
  */
-const faculty: { name: string; slug: string; role: string }[] = [
-  // Populate with REAL faculty: { name, slug, role }. No fabricated names.
-];
+const faculty = FACULTY.map((f) => ({
+  name: f.name,
+  slug: f.slug,
+  role: `${f.role} · ${f.experienceYears} yrs`,
+}));
 
 export const Route = createFileRoute("/faculty/")({
   head: () =>
@@ -30,11 +31,12 @@ function Faculty() {
       canonicalPath="/faculty"
       crumbs={[{ name: "Home", item: "/" }, { name: "Faculty" }]}
       title="Our Faculty"
+      introLead="In short:"
       intro={
         <>
-          {BRAND}'s CUET and IPMAT mentors teach full-time across our Delhi-NCR centres. Verified
-          faculty profiles — names, credentials, subjects and photos — are being added and will appear
-          here before launch.
+          {BRAND}'s CUET and IPMAT mentors bring deep subject expertise — from Quant and Verbal to
+          Logical Reasoning & DI — with an average of 10+ years' teaching experience. Meet the mentors
+          below.
         </>
       }
       schema={[itemListSchema(faculty.map((f) => ({ name: f.name, url: `/faculty/${f.slug}` })))]}

@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Award, FileText, MonitorPlay, PlayCircle, Library, LineChart } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { Tbd } from "./shared";
 import { CENTRES } from "@/config/site";
+import { STUDENTS_MENTORED, IIM_SELECTIONS_2YR } from "@/data/results";
 import hero1 from "@/assets/hero-1.jpg";
 
 export function Hero({ onBook }: { onBook: () => void }) {
@@ -31,7 +31,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
             The Prep That <br />
             <span className="relative text-brand inline-block">
               Transforms You
-              <svg className="absolute -bottom-2 left-0 w-full overflow-visible" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden>
+              <svg className="absolute -bottom-6 left-0 -z-10 w-full overflow-visible" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden>
                 <path d="M2 20 C 50 12, 130 26, 198 16" stroke="#DA202F" strokeWidth="5" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
               </svg>
             </span>
@@ -57,21 +57,21 @@ export function Hero({ onBook }: { onBook: () => void }) {
           </div>
 
           {/* Stats — only the verifiable one (centre count) is shown as fact. */}
-          <div className="mt-14 flex flex-wrap items-center gap-8 md:gap-12">
+          <div className="mt-14 flex flex-wrap sm:flex-nowrap items-center gap-6 sm:gap-8 lg:gap-10">
             <div className="flex flex-col">
               <span className="font-display text-3xl font-bold tracking-tight text-ink">
-                <Tbd label="students" />
+                {STUDENTS_MENTORED}
               </span>
               <span className="mt-1 text-sm font-medium text-body/80">Students Guided</span>
             </div>
-            <div className="hidden h-10 w-px bg-black/[0.06] md:block" />
+            <div className="hidden h-10 w-px bg-black/[0.06] sm:block" />
             <div className="flex flex-col">
               <span className="font-display text-3xl font-bold tracking-tight text-ink">
-                <Tbd label="results" />
+                {IIM_SELECTIONS_2YR}
               </span>
-              <span className="mt-1 text-sm font-medium text-body/80">Verified Selections</span>
+              <span className="mt-1 text-sm font-medium text-body/80">IIM Selections (2 yrs)</span>
             </div>
-            <div className="hidden h-10 w-px bg-black/[0.06] md:block" />
+            <div className="hidden h-10 w-px bg-black/[0.06] sm:block" />
             <div className="flex flex-col">
               <span className="font-display text-3xl font-bold tracking-tight text-ink">{CENTRES.length}</span>
               <span className="mt-1 text-sm font-medium text-body/80">Delhi-NCR Centres</span>

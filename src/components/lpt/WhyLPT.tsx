@@ -1,15 +1,16 @@
 import { Reveal } from "./Reveal";
-import { SectionHeader, Tbd } from "./shared";
+import { SectionHeader } from "./shared";
 import { Users, GraduationCap, BookMarked, FileCheck2, Headphones, Trophy, Sparkles } from "lucide-react";
+import { IIM_SELECTIONS_2YR } from "@/data/results";
+import { AVG_TEACHER_EXPERIENCE } from "@/data/faculty";
 
 /**
- * WhyLPT — value proposition. CUET + IPMAT only. Specific unverified numbers
- * (years of legacy, IIM-call counts, avg faculty experience) render as marked
- * placeholders; only qualitative, defensible claims are stated outright.
+ * WhyLPT — value proposition. CUET + IPMAT only. All figures verified
+ * (avg faculty experience, IIM selections, group teaching legacy).
  */
 const pillars = [
-  { icon: Users, stat: null as string | null, statLabel: "avg faculty exp.", title: "Experienced Faculty", desc: "Mentors who teach CUET and IPMAT full-time — not part-time freelancers." },
-  { icon: GraduationCap, stat: null, statLabel: "selections", title: "Verified Selections", desc: "We publish selections only when they're verifiable. Ask us for the list." },
+  { icon: Users, stat: `${AVG_TEACHER_EXPERIENCE} yrs` as string | null, statLabel: "avg faculty exp.", title: "Experienced Faculty", desc: "Mentors who teach CUET and IPMAT full-time — not part-time freelancers." },
+  { icon: GraduationCap, stat: IIM_SELECTIONS_2YR, statLabel: "selections", title: "Verified Selections", desc: `${IIM_SELECTIONS_2YR} IIM selections in 2 years — see the named list on our results page.` },
   { icon: BookMarked, stat: "In-house", statLabel: "", title: "Original Study Material", desc: "Modules authored in-house and revised to the latest exam pattern." },
   { icon: FileCheck2, stat: "Adaptive", statLabel: "", title: "Test Series", desc: "Proctored mocks that pinpoint weak areas and benchmark your prep." },
   { icon: Headphones, stat: "1-on-1", statLabel: "", title: "Mentorship Access", desc: "A direct line to your mentor — not a chatbot or a call centre." },
@@ -37,13 +38,13 @@ export function WhyLPT() {
                   </span>
                   <div className="mt-5 flex items-end gap-2">
                     <span className="h-display leading-none text-brand" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.03em" }}>
-                      <Tbd label="years" />
+                      24+
                     </span>
-                    <span className="mb-1 text-xl font-bold text-ink/60">of teaching legacy</span>
+                    <span className="mb-1 text-xl font-bold text-ink/60">years of teaching legacy</span>
                   </div>
                   <p className="mt-3 max-w-sm text-[0.88rem] leading-relaxed text-body">
-                    A team of CUET and IPMAT specialists across 4 Delhi-NCR centres. Add the verified
-                    founding year and legacy figure here before publishing.
+                    The LPT group brings 24+ years of teaching expertise, now focused on CUET and IPMAT
+                    across 4 Delhi-NCR centres with senior mentors averaging 10+ years each.
                   </p>
                 </div>
               </div>
@@ -57,7 +58,7 @@ export function WhyLPT() {
                 <Users className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <p className="mt-4 h-display leading-none text-brand" style={{ fontSize: "1.75rem" }}>
-                {pillars[0].stat ?? <Tbd label={pillars[0].statLabel} />}
+                {pillars[0].stat}
               </p>
               <h3 className="mt-1.5 h-display text-[1.05rem] leading-snug">{pillars[0].title}</h3>
               <p className="mt-2 text-[0.8rem] leading-relaxed text-body">{pillars[0].desc}</p>
@@ -75,7 +76,7 @@ export function WhyLPT() {
                     <Icon className="h-5 w-5" strokeWidth={1.75} />
                   </span>
                   <p className="mt-4 h-display leading-none text-brand" style={{ fontSize: "1.4rem" }}>
-                    {f.stat ?? <Tbd label={f.statLabel} />}
+                    {f.stat}
                   </p>
                   <h3 className="mt-1 h-display text-[0.95rem] leading-snug">{f.title}</h3>
                   <p className="mt-2 text-[0.78rem] leading-relaxed text-body">{f.desc}</p>

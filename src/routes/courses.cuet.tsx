@@ -4,8 +4,14 @@ import { ContentPage, Section } from "@/components/seo/ContentPage";
 import { courseSchema } from "@/lib/schema";
 import { ComparisonTable } from "@/components/seo/ComparisonTable";
 import { BRAND, canonical } from "@/config/site";
-import { Tbd } from "@/components/lpt/shared";
 import { LANDING_AREAS } from "@/components/lpt/LocalLanding";
+import {
+  CUET_BATCHES,
+  CUET_FROM_PRICE,
+  CUET_ONLINE_BATCHES,
+  CUET_MOCK_PACKAGES,
+  LEGACY_STATS,
+} from "@/data/courses";
 import type { FAQItem } from "@/components/seo/FAQ";
 
 const faqs: FAQItem[] = [
@@ -15,7 +21,7 @@ const faqs: FAQItem[] = [
   },
   {
     q: "What is the fee for CUET coaching?",
-    a: <>Fees vary by batch (live, crash, test series). Exact, transparent fees are confirmed during a free counselling call — we don't list "enquire for price" but do verify the current fee with our team.</>,
+    a: <>CUET (UG) offline fees at our GTB Nagar (Delhi) centre start from ₹25,000 (CUET 2026 Crash Course) and go up to ₹90,000 for the 2-year CUET 2028 batch — all excluding GST. See the batch table above for each option.</>,
   },
 ];
 
@@ -43,13 +49,16 @@ function CuetCourses() {
       intro={
         <>
           {BRAND} offers CUET (UG) coaching covering domain subjects, the general test and languages,
-          in offline, online and hybrid batches across 4 Delhi-NCR centres. Batches, fees and dates are
-          confirmed during a free counselling call.
+          across 4 Delhi-NCR centres. Offline batches at GTB Nagar (Delhi) start from ₹25,000 (excl.
+          GST); see the full batch lineup and fees below.
         </>
       }
       toc={[
         { id: "batches", label: "Batches & fees" },
+        { id: "online", label: "Online & self-paced" },
         { id: "covered", label: "What's covered" },
+        { id: "material", label: "Study material & mocks" },
+        { id: "legacy", label: "Our numbers" },
         { id: "local", label: "Coaching near you" },
       ]}
       ctaMessage="Hi LPT Delhi-NCR, I want CUET batch details"
@@ -58,7 +67,8 @@ function CuetCourses() {
         courseSchema({
           name: "CUET (UG) Coaching",
           description: "CUET (UG) coaching covering domain, general and language tracks, in offline, online and hybrid modes.",
-          courseMode: "Blended",
+          courseMode: "Offline",
+          price: CUET_FROM_PRICE,
           url: canonical("/courses/cuet"),
           // No aggregateRating — added only with genuine reviews (SOP A5.3).
         }),
@@ -66,22 +76,58 @@ function CuetCourses() {
     >
       <Section id="batches" heading="Batches & fees">
         <ComparisonTable
-          caption="CUET batches at LPT Delhi-NCR"
-          date="to be confirmed"
+          caption="CUET offline batches at GTB Nagar (Delhi) — fees excl. GST"
+          date="28 Jun 2026"
           source="LPT Delhi-NCR"
-          illustrative
           columns={[
             { key: "batch", header: "Batch" },
             { key: "mode", header: "Mode" },
-            { key: "fee", header: "Fee" },
+            { key: "duration", header: "Duration" },
+            { key: "fee", header: "Fee (excl. GST)" },
           ]}
-          rows={[
-            { batch: "CUET UG Live", mode: "Offline / Online / Hybrid", fee: <Tbd label="fee" /> },
-            { batch: "CUET Crash Course", mode: "Online", fee: <Tbd label="fee" /> },
-            { batch: "CUET Test Series", mode: "Online", fee: <Tbd label="fee" /> },
-          ]}
+          rows={CUET_BATCHES.map((b) => ({
+            batch: b.name,
+            mode: b.mode,
+            duration: b.duration,
+            fee: (
+              <>
+                <span className="font-semibold text-ink">{b.price}</span>
+                {b.originalPrice && (
+                  <span className="ml-2 text-xs text-body line-through">{b.originalPrice}</span>
+                )}
+                {b.discount && <span className="ml-2 text-xs font-semibold text-brand">{b.discount}</span>}
+              </>
+            ),
+          }))}
         />
-        <p className="text-sm">Transparent fees are confirmed during counselling — no "enquire for price".</p>
+        <p className="text-sm">
+          Transparent fees, no "enquire for price". Fees shown for the GTB Nagar (Delhi) centre, excl.
+          GST; other centres and online/hybrid modes may vary — confirm on a free counselling call.
+        </p>
+      </Section>
+
+      <Section id="online" heading="Online & self-paced batches">
+        <p>
+          Prefer to study from home? Choose a live, hybrid or recorded CUET batch — fees confirmed on a
+          free counselling call.
+        </p>
+        <ComparisonTable
+          caption="CUET online, hybrid & self-paced batches"
+          date="28 Jun 2026"
+          source="LPT"
+          columns={[
+            { key: "batch", header: "Batch" },
+            { key: "mode", header: "Mode" },
+            { key: "duration", header: "Duration" },
+            { key: "discount", header: "Offer" },
+          ]}
+          rows={CUET_ONLINE_BATCHES.map((b) => ({
+            batch: b.name,
+            mode: b.mode,
+            duration: b.duration,
+            discount: <span className="font-semibold text-brand">{b.discount}</span>,
+          }))}
+        />
       </Section>
 
       <Section id="covered" heading="What's covered">
@@ -91,6 +137,31 @@ function CuetCourses() {
           <li>Language section strategy.</li>
           <li>Proctored mocks and in-house study material.</li>
         </ul>
+      </Section>
+
+      <Section id="material" heading="Study material & mocks">
+        <p>Sharpen your prep with our CUET test series and printed study material:</p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {CUET_MOCK_PACKAGES.map((m) => (
+            <div key={m.name} className="rounded-2xl border border-hairline bg-white p-5">
+              <div className="font-bold text-ink">{m.name}</div>
+              <div className="mt-1 text-sm font-semibold text-brand">{m.tests}</div>
+              <p className="mt-2 text-sm text-body">{m.desc}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="legacy" heading="Numbers that define our legacy">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {LEGACY_STATS.map((s) => (
+            <div key={s.label} className="rounded-2xl bg-cream-soft p-5 text-center">
+              <div className="h-display text-3xl text-brand">{s.value}</div>
+              <div className="mt-1 text-xs font-medium text-body">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <p className="text-sm">Figures reflect the LPT group across all verticals and years.</p>
       </Section>
 
       <Section id="local" heading="CUET coaching near you">
